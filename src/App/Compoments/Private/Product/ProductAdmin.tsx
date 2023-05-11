@@ -48,49 +48,7 @@ function ProductAdmin() {
       communityGroupID : product.communityGroupID,
       levelRarityID : product.levelRarityID
     })) as unknown as DataType[];
-
-    //let color = 6 > 5 ? 'geekblue' : 'red' ;
-    // const color =() =>{
-
-    //   if(6 > 5)
-    //   return "geekblue";
-    // } ;
-
-
-    // const test = products?.map((test : any) => {
-    //   let color = "";
-    //   if (test?.levelRarityName === 'หาได้ทั่วไป') {
-    //     color = 'geekblue';
-    //   }
-    //   else{
-    //     color = 'red';
-    //   }
-    //   return (
-    //     color
-    //   );
-    // })
-
-    // (
-    //   <>
-    //   {products?.map((test) => {
-    //   let color = "";
-    //   if (test?.levelRarityName === 'หาได้ทั่วไป') {
-    //     color = 'geekblue';
-    //   }
-    //   else{
-    //     color = 'red';
-    //   }
-    //   return (
-    //     <Tag color={color}>
-    //       {more.levelrarity}
-    //     </Tag>
-    //   );
-    // })}
-
-    //   </>
-    // )
-
-
+    console.log("data",data)
 
     const columns: ColumnsType<DataType> = [
       {
@@ -113,11 +71,6 @@ function ProductAdmin() {
         key: "price",
         render: (_, more) => <Ts>{more.price}</Ts>,
       },
-      // {
-      //   title: "รายละเอียด",
-      //   key: "detail",
-      //   render: (_, more) => <Ts>{more.detail}</Ts>,
-      // },
       {
         title: "ความหายาก",
         key: "detail",

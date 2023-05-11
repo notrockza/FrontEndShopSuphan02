@@ -37,6 +37,8 @@ export const TestReport = () => {
     
         <button onClick={handlePrint}>Print 1</button>
 
+        
+
     </div>
   );
 };

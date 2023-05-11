@@ -1,6 +1,6 @@
 
 
-import { Card, Col, Row, Avatar, Space, Dropdown, MenuProps } from 'antd';
+import { Card, Col, Row, Avatar, Space, Dropdown, MenuProps, Button } from 'antd';
 import React, { useState ,useEffect } from "react";
 // import { currencyFormat, Ts } from '../../app/util/util';
 // import LayoutPrivate from './LayoutPrivate';
@@ -10,7 +10,6 @@ import Charts from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 import { useAppDispatch, useAppSelector } from '../../../Stone/configureStore';
-import { GetProduct } from '../../../Stone/productSlice';
 import { Ts } from '../../../API/util/util';
 import Doughnut3D from '../Charts/Doughnut3D';
 import Column3D from '../Charts/Column3D';
@@ -19,61 +18,107 @@ import SidebarAdmin from '../Sidebar/SidebarAdmin';
 import useReport from '../../hooks/useReport';
 import useProduct from '../../hooks/useProduct';
 import useUser from '../../hooks/useUser';
-
+import * as XLSX from 'xlsx';
+import { FileExcelOutlined ,PrinterOutlined} from '@ant-design/icons';
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 // import useProducts from '../../app/hooks/useProducts';
 
 ReactFC.fcRoot(FusionCharts, Charts ,FusionTheme);
-
-const chartData = [
-    {
-        label: "Venezuela",
-        value: "290",
-        color: "#CB4335"
-    },
-    {
-        label: "Saudi",
-        value: "260",
-        color: "#633974"
-    },
-    {
-        label: "Canada",
-        value: "180",
-        color: "#2471A3"
-    },
-    {
-        label: "Iran",
-        value: "140",
-        color: "#229954"
-    },
-    {
-        label: "Russia",
-        value: "115",
-        color: "#F1C40F"
-    },
-    {
-        label: "UAE",
-        value: "100",
-        color: "#E67E22"
-    },
-    {
-        label: "US",
-        value: "30",
-        color: "#424949"
-    },
-    {
-        label: "China",
-        value: "30",
-        color: "#1B2631"
-    }
-];
 
 const DashboardPage = () => {
     const dispatch = useAppDispatch();
     const {productStatistics ,salesStatistics}= useReport();
     const {products} = useProduct()
     const {user}=useUser()
-    console.log("user",user)
+    console.log("productStatistics",productStatistics)
     const [typeChart, setTypeChart] = useState<string>("doughnut3d");
+
+    const dataChartProductStatistics: TypeDataChart[] = productStatistics?.map(info => ({
+        label: info.product.name,
+        value: info.numPercen,
+    })) as TypeDataChart[];
+
+    interface TypeDataChart {
+        label: any;
+        value: any;
+        color: any;
+    }
+
+    //value: info.product.communityGroupID,
+
+    const dataMonth = [
+        {
+            key: 1,
+            label: "ม.ค.",
+            value: 0
+        },
+        {
+            key: 2,
+            label: "ก.พ.",
+            value: 0
+        },
+        {
+            key: 3,
+            label: "มี.ค.",
+            value: 0
+        },
+        {
+            key: 4,
+            label: "เม.ย.",
+            value: 0
+        },
+        {
+            key: 5,
+            label: "พ.ค.",
+            value: 0
+        },
+        {
+            key: 6,
+            label: "มิ.ย.",
+            value: 0
+        },
+        {
+            key: 7,
+            label: "ก.ค.",
+            value: 0
+        },
+        {
+            key: 8,
+            label: "ส.ค.",
+            value: 0
+        },
+        {
+            key: 9,
+            label: "ก.ย.",
+            value: 0
+        },
+        {
+            key: 10,
+            label: "ต.ค.",
+            value: 0
+        },
+        {
+            key: 11,
+            label: "พ.ย.",
+            value: 0
+        },
+        {
+            key: 12,
+            label: "ธ.ค.",
+            value: 0
+        }
+    ];
+
+    const data = dataMonth.map(data => {
+        const percent = salesStatistics?.sales.filter(e => e.month === data.key).reduce((curNumber, item) => {
+            return curNumber + item.percent;
+        }, 0);;
+        return {
+            label: data.label,
+            value: percent
+        }
+    });
 
     const items: MenuProps['items'] = [
         {
@@ -103,8 +148,25 @@ const DashboardPage = () => {
         <Ts>เลือก</Ts>
     </Dropdown.Button>;
 
+const handleOnExport = () => {
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    //const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataChartProductStatistics); 
+    XLSX.utils.book_append_sheet(wb, ws, "MySheet1");
+    XLSX.writeFile(wb, "MyExcel.xlsx");
+  };
+
+  const componentRef = useRef(null);
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: "emp0data",
+  });
+
+
     return (
          <SidebarAdmin>
+          
             <Space direction='vertical' size={"large"} style={{ display: "flex" }} >
                
 
@@ -139,21 +201,37 @@ const DashboardPage = () => {
                                 </div>
                             </div>
                         </div>
+                        <Button onClick={handlePrint} className="mr-2"><PrinterOutlined style={{}}/>Print</Button>
+                        <Button onClick={handleOnExport}><FileExcelOutlined />Excel</Button>
                     </div>
               
-                <div>
-                    <Row gutter={16}>
-                        <Col className="gutter-row center" span={12}>
+                <div ref={componentRef}>
+                    <Row gutter={16} >
+                        <Col className="gutter-row center" span={12} >
                             <Card title="สถิติสินค้า" extra={DropdownChart01} className='text-st' bordered={false} style={{ width: "100%" }}>
-                                <Doughnut3D data={chartData} ReactFC={ReactFC} typeChart={typeChart} />
+                                <Doughnut3D data={dataChartProductStatistics} ReactFC={ReactFC} typeChart={typeChart} />
                             </Card>
                         </Col>
                         <Col className="gutter-row center" span={12}>
                             <Card title="สถิติการขาย" className='text-st' bordered={false} style={{ width: "100%" }}>
-                                <Column3D data={chartData} ReactFC={ReactFC} />
+                                <Column3D data={data} ReactFC={ReactFC} />
                             </Card>
                         </Col>
                     </Row>
+
+                    <Row gutter={16}>
+                        {/* <Col className="gutter-row center" span={12}>
+                            <Card title="สถิติสินค้า" extra={DropdownChart01} className='text-st' bordered={false} style={{ width: "100%" }}>
+                                <Doughnut3D data={dataChartProductStatistics} ReactFC={ReactFC} typeChart={typeChart} />
+                            </Card>
+                        </Col> */}
+                        {/* <Col className="gutter-row center" span={12}>
+                            <Card title="สถิติชุมชน" className='text-st' bordered={false} style={{ width: "100%" }}>
+                                <Column3D data={data} ReactFC={ReactFC} />
+                            </Card>
+                        </Col> */}
+                    </Row>
+                    
                 </div>
             </Space>
 

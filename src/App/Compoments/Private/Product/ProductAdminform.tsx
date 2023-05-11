@@ -81,7 +81,6 @@ function ProductAdminform() {
     communityGroupID: state ? state.communityGroupID : null,
     levelRarityID: state ? state.levelRarityID : null,
     formFiles: "",
-    
   };
 
 

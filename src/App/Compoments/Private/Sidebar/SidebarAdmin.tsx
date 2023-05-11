@@ -6,8 +6,8 @@ import {
   RollbackOutlined,
   DashboardOutlined,
   UserOutlined,
-  FileDoneOutlined,
-  ExceptionOutlined
+  EditOutlined,
+  ExceptionOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme, MenuProps } from "antd";
 import ProductAdmin from "../Product/ProductAdmin";
@@ -52,12 +52,29 @@ function SidebarAdmin({ children }: any) {
       "1",
       <DashboardOutlined style={{ fontSize: "20px" }} />
     ),
-    getItem("รายการสินค้า", "2", <InboxOutlined style={{ fontSize: "20px" }} />),
-    getItem('รายชื่อผู้ใช้', '3', <UserOutlined style={{ fontSize: "20px" }} />),
-    getItem('ยืนยันรายการสินค้า', '4', <ExceptionOutlined style={{ fontSize: "20px" }} />),
+    getItem(
+      "รายการสินค้า",
+      "2",
+      <InboxOutlined style={{ fontSize: "20px" }} />
+    ),
+    getItem(
+      "รายชื่อผู้ใช้",
+      "3",
+      <UserOutlined style={{ fontSize: "20px" }} />
+    ),
+    getItem(
+      "ยืนยันรายการสินค้า",
+      "4",
+      <ExceptionOutlined style={{ fontSize: "20px" }} />
+    ),
+    getItem(
+      "ประชาสัมพันธ์",
+      "5",
+      <EditOutlined style={{ fontSize: "20px" }} />
+    ),
     getItem("กลับ", "9", <RollbackOutlined style={{ fontSize: "20px" }} />),
   ];
-<SidebarAdmin></SidebarAdmin>
+  <SidebarAdmin></SidebarAdmin>;
   const onPage = ({ key }: Page) => {
     switch (key) {
       case "1":
@@ -69,9 +86,12 @@ function SidebarAdmin({ children }: any) {
       case "3":
         navigate("/admin/user");
         break;
-        case "4":
-          navigate("/admin/order");
-          break;
+      case "4":
+        navigate("/admin/order");
+        break;
+      case "5":
+        navigate("/admin/Information");
+        break;
       case "9":
         navigate("/");
         dispatch(resetProductParams());

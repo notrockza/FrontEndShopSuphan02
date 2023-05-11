@@ -127,7 +127,7 @@ export const UserMenu = () => {
         <ul className="navigation">
           <li className="active dropdown">
             <a href="/">หน้าเเรก</a>
-            <ul className="submenu">
+            {/* <ul className="submenu">
               <li className="active">
                 <a href="/">หน้า หนึ่ง</a>
               </li>
@@ -137,18 +137,18 @@ export const UserMenu = () => {
               <li>
                 <a href="/">หน้าที่ สาม</a>
               </li>
-            </ul>
+            </ul> */}
           </li>
-          <li>
+          {/* <li>
             <a href="/">เกี่ยวกับเรา</a>
-          </li>
+          </li> */}
 
           <li>
             <a href="/product">สินค้า</a>
           </li>
-          <li>
+          {/* <li>
             <a href="/">ติดต่อ</a>
-          </li>
+          </li> */}
           {account !== null ? (
             <></>
           ) : (

@@ -5,7 +5,10 @@ import SliderUser from "../Silder/SliderUser";
 import { Card, Carousel, Divider, Row } from "antd";
 import { Ts } from "../../API/util/util";
 import useProduct from "../hooks/useProduct";
-import { Collapse } from 'antd';
+import { Collapse } from "antd";
+import useInformation from "../hooks/useInformation";
+import moment from "moment";
+import { Image } from "antd";
 const { Panel } = Collapse;
 
 function AboutUser() {
@@ -21,19 +24,26 @@ function AboutUser() {
 
   const { CommunityGroups } = useProduct();
 
-  const Community = CommunityGroups?.map((text)=>{
-    return(
-     <>
-            <Collapse defaultActiveKey={[1]}  onChange={onChangecollapse} style={{background:"while", color:"whitesmoke"  }}>
-        <Panel header={text.communityGroupName} key={text.id}  >
-          <p >{text.textHistory}</p>
-        </Panel>
-      </Collapse>
-      {/* <Divider orientation="left"></Divider> */}
-      
+  const { information } = useInformation();
+
+
+
+  const Community = CommunityGroups?.map((text) => {
+    return (
+      <>
+        <Collapse
+          defaultActiveKey={[1]}
+          onChange={onChangecollapse}
+          style={{ background: "while", color: "whitesmoke" }}
+        >
+          <Panel header={text.communityGroupName} key={text.id}>
+            <p>{text.textHistory}</p>
+          </Panel>
+        </Collapse>
+        {/* <Divider orientation="left"></Divider> */}
       </>
-    )
-  })
+    );
+  });
 
   return (
     <>
@@ -48,57 +58,56 @@ function AboutUser() {
 
         {/* <!-- faq-area --> */}
         <Card>
-        <section
-          className="faq-area faq-bg pt-120 pb-120"
-          data-background="./src/assets/img/bg/faq_bg.jpg"
-        >
-          
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="faq-image">
-                  <Carousel afterChange={onChange} autoplay>
-                    <div>
-                      <img
-                        style={contentStyle}
-                        src="https://adaymagazine.com/wp-content/uploads/2019/07/Salee-Wonderland-1.jpg"
-                      />
-                    </div>
-                    <div>
-                      <img
-                        style={contentStyle}
-                        src="https://tharahat.go.th/images_file/71/images/ot2.jpeg"
-                      />
-                    </div>
-                    <div>
-                      <img
-                        style={contentStyle}
-                        src="http://www.suphan.biz/samchuk18.jpg"
-                      />
-                    </div>
-                    <div>
-                      <img
-                        style={contentStyle}
-                        src="https://img.wongnai.com/p/1920x0/2017/08/23/f5128260dbcd4c74aa37d22058488ef7.jpg"
-                      />
-                    </div>
-                    <div>
-                      <img
-                        style={contentStyle}
-                        src="http://www.suphan.biz/souvenir04.jpg"
-                      />
-                    </div>
-                  </Carousel>
+          <section
+            className="faq-area faq-bg pt-120 pb-120"
+            data-background="https://drive.google.com/uc?id=1XPaMAJYxw4uYGNavRyxK9lc7u5qwv_V6"
+          >
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="faq-image">
+                    <Carousel afterChange={onChange} autoplay>
+                      <div>
+                        <img
+                          style={contentStyle}
+                          src="https://adaymagazine.com/wp-content/uploads/2019/07/Salee-Wonderland-1.jpg"
+                        />
+                      </div>
+                      <div>
+                        <img
+                          style={contentStyle}
+                          src="https://tharahat.go.th/images_file/71/images/ot2.jpeg"
+                        />
+                      </div>
+                      <div>
+                        <img
+                          style={contentStyle}
+                          src="http://www.suphan.biz/samchuk18.jpg"
+                        />
+                      </div>
+                      <div>
+                        <img
+                          style={contentStyle}
+                          src="https://img.wongnai.com/p/1920x0/2017/08/23/f5128260dbcd4c74aa37d22058488ef7.jpg"
+                        />
+                      </div>
+                      <div>
+                        <img
+                          style={contentStyle}
+                          src="http://www.suphan.biz/souvenir04.jpg"
+                        />
+                      </div>
+                    </Carousel>
+                  </div>
                 </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="faq-wrap">
-                  <div className="section-title mb-50">
-                    <h6 className="sub-title">คำถามที่พบบ่อย</h6>
-                    <h2 className="title">
-                      <span>สินค้าหน้าที่สนใจ</span> ของเเต่ละชุมชน
-                    </h2>
-                  {/* </div>
+                <div className="col-lg-6">
+                  <div className="faq-wrap">
+                    <div className="section-title mb-50">
+                      <h6 className="sub-title">คำถามที่พบบ่อย</h6>
+                      <h2 className="title">
+                        <span>สินค้าหน้าที่สนใจ</span> ของเเต่ละชุมชน
+                      </h2>
+                      {/* </div>
                   <div id="accordion">
                     <h3>ร้านสาลี่เอกชัย</h3>
                     <div className="accordion-content">
@@ -128,17 +137,13 @@ function AboutUser() {
                         เหมาะกับเป็นของฝาก
                       </p>
                     </div> */}
-                    <div className="pt-3">
-                    {Community}
+                      <div className="pt-3">{Community}</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        
-        </section>
-
+          </section>
         </Card>
         {/* <!-- video-area --> */}
         <section
@@ -165,36 +170,91 @@ function AboutUser() {
                     </h2>
                   </div>
                 </div>
-                <div className="newsletter-wrap">
-                  <div className="section-title newsletter-title">
-                    <h2 className="title">
-                      สมัครรับ <span>ข่าวสาร</span>
-                    </h2>
-                  </div>
-                  <div className="newsletter-form">
-                    <form action="#">
-                      <input
-                        type="email"
-                        placeholder="ป้อนที่อยู่อีเมลของคุณที่นี่"
-                      />
-                      <button className="btn gradient-btn">
-                        สมัคร <i className="fas fa-rocket"></i>
-                      </button>
-                    </form>
-                  </div>
-                </div>
+               
               </div>
             </div>
           </div>
           <div
             className="video-bottom-shape"
-            data-background="./src/assets/img/bg/video_bottom_shape.png"
+            data-background="https://drive.google.com/uc?id=1ZX8EGfv79VpHtd-kRphcCJhaCx2buH-5"
           ></div>
         </section>
+
+
+        <section
+          className="blog-area blog-bg pt-120 pb-90"
+          data-background="https://drive.google.com/uc?id=11wp7XsKXbvkm6ndAFsTA0QzzlE_32J-o"
+        >
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-xl-6 col-lg-8">
+                <div className="section-title text-center mb-70">
+                  <h6 className="sub-title">ข่าวสาร</h6>
+                  <h2 className="title">
+                    <span>ข่าวสาร</span> ประชาสัมพันธ์ 
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-center">
+              
+             
+              
+
+              {information?.map((data) => {
+              return (
+              
+                  <div className="col-lg-4 col-md-6">
+                    <div className="blog-post-item mb-30">
+                      <div className="blog-post-thumb position-relative">
+                        
+                          <Image src={data.image}  />
+                      
+                      
+                      </div>
+                      <div className="blog-post-content">
+                        <div className="blog-post-meta">
+                          <ul>
+                            <li>
+                              <i className="far fa-user"></i>
+                              <a href="#">Admin</a>
+                            </li>
+                            <li>
+                              <i className="far fa-calendar-alt"></i>{" "}
+                              {moment
+                                .utc(data.created)
+                                .tz("Asia/Bangkok")
+                                .format("YYYY-MM-DD HH:mm:ss")}
+                            </li>
+                          </ul>
+                        </div>
+                        <h5>
+                          <Ts >
+                            {data.nameinformation}
+                          </Ts>
+                        </h5>
+                        <p>
+                         {/* {data.detaiinformation} */}
+                        </p>
+                        <a href={`/detail/${data.id}`} className="arrow-btn">
+                          อ่านเพื่มเตืม <span></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              );
+            })}
+
+            </div>
+           
+          </div>
+        </section>
+          
+
         <section
           className="fact-area fact-bg"
           style={{
-            backgroundImage: `url("./src/assets/img/bg/fact_bg.jpg")`,
+            backgroundImage: `url("https://drive.google.com/uc?id=1HV-xtW_Bb0F0a1VzrlWFbeZKqB_LiYlp")`,
           }}
         >
           <div className="container">
@@ -258,6 +318,75 @@ function AboutUser() {
             </div>
           </div>
         </section>
+
+        {/* <section
+          className="blog-area blog-bg pt-120 pb-90"
+          data-background="img/bg/blog_bg.jpg"
+        >
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-xl-6 col-lg-8">
+                <div className="section-title text-center mb-70">
+                  <h6 className="sub-title">FROM THE BLOG</h6>
+                  <h2 className="title">
+                    <span>Latest</span> News & Articles
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-center">
+              
+             
+              
+
+              {information?.map((data) => {
+              return (
+              
+                  <div className="col-lg-4 col-md-6">
+                    <div className="blog-post-item mb-30">
+                      <div className="blog-post-thumb position-relative">
+                        
+                          <Image src={data.image}  />
+                      
+                      
+                      </div>
+                      <div className="blog-post-content">
+                        <div className="blog-post-meta">
+                          <ul>
+                            <li>
+                              <i className="far fa-user"></i>
+                              <a href="#">Admin</a>
+                            </li>
+                            <li>
+                              <i className="far fa-calendar-alt"></i>{" "}
+                              {moment
+                                .utc(data.created)
+                                .tz("Asia/Bangkok")
+                                .format("YYYY-MM-DD HH:mm:ss")}
+                            </li>
+                          </ul>
+                        </div>
+                        <h4>
+                          <Ts >
+                            {data.nameinformation}
+                          </Ts>
+                        </h4>
+                        <p>
+                         {data.detaiinformation}
+                        </p>
+                        <a href="#" className="arrow-btn">
+                          อ่านเพื่มเตืม <span></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              );
+            })}
+
+            </div>
+           
+          </div>
+        </section> */}
 
         <FooterUser />
       </>

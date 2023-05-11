@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import agent from "../API/Agent";
-import { ProductStatistics, SalesStatistics } from "../Model/SalesStatistics";
+import { ProductStatistics, SalesStatistics } from "../Model/Report";
 
 
 interface ReportState{

@@ -24,6 +24,7 @@ import useProduct from "../hooks/useProduct";
 import useReviews from "../hooks/useReviews";
 import useCart from "../hooks/useCart";
 import DetailCardskeleton from "./DetailCardskeleton/DetailCardskeleton";
+import { URLSever } from "../../API/util/util";
 
 interface IImageGallery {
   original: any;
@@ -112,7 +113,7 @@ function Details() {
         <div className="p-2">
           <span className="round ">
             <Avatar
-              src={"https://localhost:7048/images/" + revies.account.image}
+              src={URLSever + revies.account.image}
               alt="user"
               style={{ width: "50px", height: "50px" }}
             />
@@ -156,7 +157,7 @@ function Details() {
       <section
         className="breadcrumb-area breadcrumb-bg breadcrumb-style2"
         style={{
-          backgroundImage: `url("/src/assets/img/new/test06.png")`,
+          backgroundImage: `url("https://drive.google.com/uc?id=1uJezOLVAd6v0ybnuYe8bDlH8g7NgMG8j")`,
         }}
       >
         <div className="container" >

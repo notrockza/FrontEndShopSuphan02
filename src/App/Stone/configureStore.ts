@@ -13,6 +13,7 @@ import { productSlice } from './productSlice';
 import { ReviewSlice } from './ReviewSlice';
 import { orderSlice } from './orderSlice';
 import { reportSlice } from './reportSlice';
+import { InformationSlice } from './InformationSlice';
 
 export const store = configureStore({
     reducer: {
@@ -27,7 +28,8 @@ export const store = configureStore({
         address : addressSilce.reducer,
         detailProduct : detailProductSlice.reducer,
         order : orderSlice.reducer ,
-        report : reportSlice.reducer
+        report : reportSlice.reducer,
+        information: InformationSlice.reducer
 
     } ,
     

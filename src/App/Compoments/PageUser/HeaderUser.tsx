@@ -41,9 +41,9 @@ function HeaderUser() {
               <div className="header-bottom-wrap d-none d-lg-flex">
                 <div className="header-tag-list">
                   <ul>
-                    <li>
+                    {/* <li>
                       <a href="/login">เข้าสู่ระบบ</a>
-                    </li>
+                    </li> */}
                     <li>
                       <a href="#">บัญชี</a>
                     </li>

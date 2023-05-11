@@ -9,7 +9,7 @@ function SilderProduct() {
     <div>
                 <section className="breadcrumb-area breadcrumb-bg breadcrumb-style2"
                 style={{
-                    backgroundImage: `url("./src/assets/img/new/test03.png")`
+                    backgroundImage: `url("https://drive.google.com/uc?id=1hIORzJLzYwc_1KgONvtfup0ferYB9sz2")`
 
                 }}>
                 <div className="container">

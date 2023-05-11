@@ -45,7 +45,7 @@ function Product() {
       <div className="col-lg-4 col-md-6 col-sm-8 ">
         <div className="shop-item text-center mb-40">
           <div className="shop-thumb mb-20">
-            <a href={`/detail/${data.id}`}>
+            <a href={`/details/${data.id}`}>
               <img src={data.image} />
               
               <span>หยิบใส่ตะกร้า</span>

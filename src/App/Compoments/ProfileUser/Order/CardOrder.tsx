@@ -1,5 +1,5 @@
 // import React, { useState } from 'react';
-import { Ts } from "../../../API/util/util";
+import { Ts, URLSever } from "../../../API/util/util";
 import {
   Button,
   Card,
@@ -102,7 +102,7 @@ function CardOrder() {
                                 <Col span={3}>
                                   <Image
                                     src={
-                                      "https://localhost:7048/images/" +
+                                      URLSever +
                                       data.product.image
                                     }
                                     width="100%"

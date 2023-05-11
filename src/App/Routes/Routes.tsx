@@ -20,12 +20,16 @@ import CheckoutPage from "../Compoments/Checkout/CheckoutPage";
 import Test from "../Compoments/Test/Test";
 import Error404 from "../Compoments/error404/Error404";
 import OrderAdmin from "../Compoments/Private/Order/OrderAdmin";
+import InformationAdmin from "../Compoments/Private/Information/InformationAdmin";
+import InformationAdminform from "../Compoments/Private/Information/InformationAdminform";
+import DetailAbout from "../Compoments/PageUser/DetailAbout";
 
 
 export const mainRoutes = (
   <Routes>
     <Route path="/" element={<AboutUser />} />
-    <Route path='*' element={<Error404 />} />
+    <Route path="/detail/:id" element={<DetailAbout />} />
+    <Route path='*' element={<AboutUser />} />
     <Route
       path="/login"
       element={
@@ -54,10 +58,13 @@ export const mainRoutes = (
       <Route path="/admin/product/detail/:id" element={<ProductAdminDetails />} />
       <Route path="/admin/user" element={<UserAdmin />} />
       <Route path="/admin/order" element={<OrderAdmin />} />
+      <Route path="/admin/Information" element={<InformationAdmin />} />
+      <Route path="/admin/Information/form" element={<InformationAdminform />} />
+      
       
     </Route>
     <Route path="/product" element={<Product />} />
-    <Route path="/detail/:id" element={<Details />} />
+    <Route path="/details/:id" element={<Details />} />
     <Route path="/test" element={<TestReport />} />
     <Route path="/testna" element={<Test />} />
 

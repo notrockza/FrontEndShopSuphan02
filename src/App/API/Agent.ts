@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 // axios.defaults.baseURL = import.meta.env.VITE_APP_BACKEND_URL;
+//axios.defaults.baseURL = "http://10.103.0.16/cs63/s03/project-end/";
 axios.defaults.baseURL = "https://localhost:7048/";
 
 // axios.defaults.withCredentials = true;
@@ -118,6 +119,14 @@ const Report = {
     getProductStatistics: () => requests.get("Report/GetProductStatistics"),
     getSalesStatistics: () => requests.get("Report/GetSalesStatistics"),
 }
+const Information = {
+    getInformatonAll: () => requests.get('Information/GetInformation'),
+    details: (id: number) => requests.get(`Information/${id}`),
+    create: (value: any) => requests.post('Information/AddInformation', createFormData (value)),
+    update: (value: any) => requests.put("Information/UpdateInformation", createFormData (value)),
+    delete: (id: number) => requests.delete(`Information/DeleteInformation?id=${id}`),
+};
+
 
 
 const agent = {
@@ -132,7 +141,8 @@ const agent = {
     Review,
     Order,
     Address,
-    Report
+    Report,
+    Information
 };
 
 export default agent;

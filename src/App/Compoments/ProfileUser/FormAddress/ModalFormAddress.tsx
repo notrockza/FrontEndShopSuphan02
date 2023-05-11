@@ -143,7 +143,7 @@ const ModalFormAddress = ({ modalOpen, setModalOpen, address }: Props) => {
                             resetForm();
                         }}
                         onOk={handleSubmit}
-                        title="ที่อยู่ใหม่"
+                        title="ที่อยู่"
                         content={<div style={{ padding: "20px" }}>
                             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                                 <Row >

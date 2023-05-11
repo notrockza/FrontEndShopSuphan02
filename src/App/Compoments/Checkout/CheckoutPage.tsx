@@ -82,7 +82,7 @@ const columns: ColumnsType<DataType> = [
 function CheckoutPage() {
   const dispatch = useAppDispatch();
   const { addresses } = useAddress();
-  const address = addresses.find((x) => x.statusAddressID === 2);
+  const address = addresses.find((x) => x.statusAddressID === 1);
   const navigate = useNavigate();
   const { carts, priceTotal } = useCart();
   const accountid = JSON.parse(localStorage.getItem("account")!);
@@ -110,7 +110,7 @@ function CheckoutPage() {
 
 
 
-  const test = carts?.map((cart) => {
+  const data = carts?.map((cart) => {
     return (
       <ColAccount>
         <Card hoverable className="text-st mt-2 " key={cart.id}>
@@ -257,7 +257,7 @@ function CheckoutPage() {
                     </Card>
                   </List>
                 ) : (
-                  <>{test}</>
+                  <>{data}</>
                 )}
               </div>
             </div>

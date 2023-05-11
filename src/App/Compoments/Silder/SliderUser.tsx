@@ -20,7 +20,7 @@ function SliderUser() {
                     <div className="slider-active">
                         <div className="single-slider slider-bg fix"
                          style={{ 
-                            backgroundImage: `url("./src/assets/img/new/test03.png")` 
+                            backgroundImage: `url("https://drive.google.com/uc?id=1hIORzJLzYwc_1KgONvtfup0ferYB9sz2")` 
                           }}
                          >
                             <div className="container">
@@ -37,14 +37,14 @@ function SliderUser() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="slider-shape"><img src="./src/assets/img/slider/slider_shape01.png" data-animation="fadeInLeft" data-delay="1.1s" alt="" /></div>
-                            <div className="slider-shape shape-2"><img src="./src/assets/img/slider/slider_shape02.png" data-animation="fadeInRight" data-delay="1.1s" alt="" /></div>
+                            <div className="slider-shape"><img src="https://drive.google.com/uc?id=12PJIitNSKzbrStJl0ItewKwbnfhWOoND" data-animation="fadeInLeft" data-delay="1.1s" alt="" /></div>
+                            <div className="slider-shape shape-2"><img src="https://drive.google.com/uc?id=1vPW1uuVUnDLgCOMIJ5avFehDEwFPXmNu" data-animation="fadeInRight" data-delay="1.1s" alt="" /></div>
                         </div>
 
                         
                         
                     </div>
-                    <div className="slider-bottom-bg" data-background="./src/assets/img/slider/slider_bottom.png"></div>
+                    <div className="slider-bottom-bg" data-background="https://drive.google.com/uc?id=1Qkcx04NlPzTQoxfdC8w_dyWXXBbmXsW-"></div>
                 </section>
                 </>
   )
