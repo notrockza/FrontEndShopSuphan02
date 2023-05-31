@@ -1,7 +1,6 @@
 import { CloseOutlined, CopyOutlined, LoadingOutlined } from '@ant-design/icons';
 import { SetStateAction, useState } from "react";
 import { Badge, Button, Col, Divider, message, Modal, Row, Upload, UploadProps } from 'antd'
-import { AiOutlineCloudUpload } from "react-icons/ai";
 import { BiCloudUpload } from "react-icons/bi";
 
 // import { CopyToClipboard } from 'react-copy-to-clipboard';

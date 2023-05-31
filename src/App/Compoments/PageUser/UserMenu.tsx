@@ -18,15 +18,17 @@ import { Fragment, useEffect } from "react";
 import "../ProfileUser/ProfileUserCss.css";
 import { fetchCartAsync, removeCartItemAsync } from "../../Stone/cartSlice";
 import { LogoutOutlined } from "@ant-design/icons";
-import { BiLogIn } from "react-icons/bi";
+import { BiLogIn, } from "react-icons/bi";
 import { VscAccount } from "react-icons/vsc";
 import { GrUserAdmin } from "react-icons/Gr";
+import { AiOutlineShoppingCart } from "react-icons/Ai";
+
 import useCart from "../hooks/useCart";
 import React from "react";
 import { Ts } from "../../API/util/util";
 import useUser from "../hooks/useUser";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 export const UserMenu = () => {
   const { itemCount, carts, priceTotal } = useCart();
@@ -75,28 +77,28 @@ export const UserMenu = () => {
     {
       key: "1",
       label: (
-        <a href="/profile">
+        <Link to="/profile">
           <VscAccount /> บัญชี
-        </a>
+        </Link>
       ),
     },
     {
       key: "2",
       label: (
-        <a rel="noopener noreferrer" onClick={() => {
+        <Link to="/profile" rel="noopener noreferrer" onClick={() => {
           navigate("/profile", { state: "3" });
         }}> 
           รายการสั่งซื้อ
-        </a>
+        </Link>
       ),
     },
     {
       key: "3",
       label: (
         
-        <a rel="noopener noreferrer" href="/admin/dashboard">
+        <Link rel="noopener noreferrer" to="/admin/dashboard">
            เเอดมิน
-        </a>
+        </Link>
         
       ),
 
@@ -107,14 +109,14 @@ export const UserMenu = () => {
       key: "4",
       danger: true,
       label: (
-        <a
+        <Link
           rel="noopener noreferrer"
           onClick={() => {
             submitlogout();
-          }}
-        >
+
+          } } to=""        >
           <BiLogIn /> ออกจากระบบ
-        </a>
+        </Link>
       ),
     },
   ];
@@ -126,7 +128,7 @@ export const UserMenu = () => {
       <div className="navbar-wrap main-menu d-none d-lg-flex">
         <ul className="navigation">
           <li className="active dropdown">
-            <a href="/">หน้าเเรก</a>
+            <Link to="/">หน้าเเรก</Link>
             {/* <ul className="submenu">
               <li className="active">
                 <a href="/">หน้า หนึ่ง</a>
@@ -144,7 +146,7 @@ export const UserMenu = () => {
           </li> */}
 
           <li>
-            <a href="/product">สินค้า</a>
+            <Link to="/product">สินค้า</Link>
           </li>
           {/* <li>
             <a href="/">ติดต่อ</a>
@@ -153,7 +155,7 @@ export const UserMenu = () => {
             <></>
           ) : (
             <li>
-              <a href="/login">เข้าสู้ระบบ</a>
+              <Link to="/login">เข้าสู้ระบบ</Link>
             </li>
           )}
         </ul>
@@ -163,9 +165,13 @@ export const UserMenu = () => {
         <li>
           <div className="header-action d-none d-md-block">
             <ul>
+              
               <li className="header-shop-cart">
-                <a href="/cart">
+                <Link to="/cart">
                   <i className="fas fa-shopping-basket"></i>
+                  
+                  {/* <ShoppingCartOutlined /> */}
+                
                   {itemCount === 0 ? (
                     <div></div>
                   ) : (
@@ -175,7 +181,7 @@ export const UserMenu = () => {
                       </span>
                     </>
                   )}
-                </a>
+                </Link>
                 <ul className="minicart">
                   {carts?.map((cart) => {
                     return (
@@ -231,7 +237,7 @@ export const UserMenu = () => {
                   </li>
                   <li>
                     <div className="checkout-link">
-                      <a href="/cart">ตะกร้าสินค้า</a>
+                      <Link to="/cart">ตะกร้าสินค้า</Link>
                       <Ts className="red-color" href="#">
                         สั่งซื้อสินค้า
                       </Ts>

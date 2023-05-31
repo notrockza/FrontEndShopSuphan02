@@ -9,6 +9,8 @@ import { Collapse } from "antd";
 import useInformation from "../hooks/useInformation";
 import moment from "moment";
 import { Image } from "antd";
+import { Link } from "react-router-dom";
+import {PlayCircleOutlined  } from '@ant-design/icons';
 const { Panel } = Collapse;
 
 function AboutUser() {
@@ -161,7 +163,8 @@ function AboutUser() {
                       href="https://www.youtube.com/watch?v=ugNlpcxRGDU"
                       className="popup-video"
                     >
-                      <i className="fas fa-play"></i>
+                      {/* <i className="fas fa-play"></i> */}
+                      <PlayCircleOutlined  />
                     </a>
                   </div>
                   <div className="section-title white-title text-center mb-70">
@@ -217,7 +220,7 @@ function AboutUser() {
                           <ul>
                             <li>
                               <i className="far fa-user"></i>
-                              <a href="#">Admin</a>
+                              <Link to="#">Admin</Link>
                             </li>
                             <li>
                               <i className="far fa-calendar-alt"></i>{" "}
@@ -236,9 +239,9 @@ function AboutUser() {
                         <p>
                          {/* {data.detaiinformation} */}
                         </p>
-                        <a href={`/detail/${data.id}`} className="arrow-btn">
+                        <Link to={`/detail/${data.id}`} className="arrow-btn">
                           อ่านเพื่มเตืม <span></span>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -251,7 +254,7 @@ function AboutUser() {
         </section>
           
 
-        <section
+        {/* <section
           className="fact-area fact-bg"
           style={{
             backgroundImage: `url("https://drive.google.com/uc?id=1HV-xtW_Bb0F0a1VzrlWFbeZKqB_LiYlp")`,
@@ -317,7 +320,7 @@ function AboutUser() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* <section
           className="blog-area blog-bg pt-120 pb-90"

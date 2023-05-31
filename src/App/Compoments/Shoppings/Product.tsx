@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import usePagination from "../hooks/usePagination";
 import useProduct from "../hooks/useProduct";
 import FooterUser from "../PageUser/FooterUser";
@@ -45,15 +46,15 @@ function Product() {
       <div className="col-lg-4 col-md-6 col-sm-8 ">
         <div className="shop-item text-center mb-40">
           <div className="shop-thumb mb-20">
-            <a href={`/details/${data.id}`}>
+            <Link to={`/details/${data.id}`}>
               <img src={data.image} />
               
               <span>หยิบใส่ตะกร้า</span>
-            </a>
+            </Link>
           </div>
           <div className="shop-item-content">
             <h4>
-              <a href="#">{data.name}</a>
+              <Link to="#">{data.name}</Link>
             </h4>
             <span className="old-price">
               {/* <del>${data.price}</del> */}
@@ -83,7 +84,7 @@ function Product() {
                 <div className="shop-action-result">
                   <span>จำนวนสินค้าที่เเสดง ({products?.length})</span>
                 </div>
-                <div className="shop-action-form">
+                {/* <div className="shop-action-form">
                   <form action="#">
                     <select className="custom-select">
                       <option>อาหาร</option>
@@ -91,7 +92,7 @@ function Product() {
                       <option>เครื้องดื้ม</option>
                     </select>
                   </form>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

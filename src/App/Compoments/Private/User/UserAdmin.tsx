@@ -6,7 +6,7 @@ import { DeleteUser, GetAccountAll } from '../../../Stone/accountSlice';
 import { useAppDispatch, useAppSelector } from '../../../Stone/configureStore';
 import SidebarAdmin from '../Sidebar/SidebarAdmin'
 import { Radio, Space, Table, Tag,Image ,MenuProps ,Dropdown, Button ,Col} from 'antd';
-import { DeleteFilled,PrinterOutlined,FileExcelOutlined } from '@ant-design/icons';
+import { DeleteFilled,PrinterOutlined,FileExcelOutlined,FilePdfOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { TestReport } from '../../Test/TestReport';
 import { useReactToPrint } from "react-to-print";
@@ -14,6 +14,10 @@ import { forwardRef, MutableRefObject, useRef } from "react";
 import * as XLSX from 'xlsx';
 import { Ts } from '../../../API/util/util';
 import agent from '../../../API/Agent';
+
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFAccount from "../PDF/PDFAccount";
+import { Account } from '../../../Model/Address';
 
 function UserAdmin() {
 
@@ -133,14 +137,29 @@ function UserAdmin() {
     documentTitle: "emp0data",
   });
 
-  
+  // const { account } = useAppSelector(
+  //   (state) => state.account
+  // );
+
 
 
   return (
     <SidebarAdmin>
        <h4>ผู้ใช้</h4>
     <Button onClick={handlePrint} className="mr-2"><PrinterOutlined style={{}}/>Print</Button>
-    <Button onClick={handleOnExport}><FileExcelOutlined />Excel</Button>
+    <Button  onClick={handleOnExport} className="mr-2"><FileExcelOutlined />Excel</Button>
+    <PDFDownloadLink
+        document={<PDFAccount account={user as unknown as User[]} />}
+        fileName="รายงานผู้ใช้งาน.pdf"
+      >
+        <Button
+          className=" btn-sm btn-rounded"
+          style={{marginTop:"5px", marginLeft: "0.25%" }}
+          // danger
+        >
+          <FilePdfOutlined /> PDF
+        </Button>
+      </PDFDownloadLink>
     <div style={{ height: '100vh' }}>
     {/* <TestReport/> */}
     <div>

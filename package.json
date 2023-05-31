@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@mui/icons-material": "^5.11.0",
-    "@react-pdf/renderer": "^3.1.7",
+    "@react-pdf/renderer": "^3.1.9",
     "@reduxjs/toolkit": "^1.9.1",
     "antd": "^5.1.4",
     "axios": "^1.2.2",

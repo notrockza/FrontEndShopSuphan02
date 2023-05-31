@@ -1,6 +1,6 @@
 
 
-import { Card, Col, Row, Avatar, Space, Dropdown, MenuProps, Button } from 'antd';
+import { Card, Col, Row, Avatar, Space, Dropdown, MenuProps, Button, DatePickerProps, DatePicker } from 'antd';
 import React, { useState ,useEffect } from "react";
 // import { currencyFormat, Ts } from '../../app/util/util';
 // import LayoutPrivate from './LayoutPrivate';
@@ -19,19 +19,24 @@ import useReport from '../../hooks/useReport';
 import useProduct from '../../hooks/useProduct';
 import useUser from '../../hooks/useUser';
 import * as XLSX from 'xlsx';
-import { FileExcelOutlined ,PrinterOutlined} from '@ant-design/icons';
+import { FileExcelOutlined ,PrinterOutlined,FilePdfOutlined} from '@ant-design/icons';
 import { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-// import useProducts from '../../app/hooks/useProducts';
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFReport from '../PDF/PDFReport ';
+import { Community, ProductStatistics } from '../../../Model/Report';
+import agent from '../../../API/Agent';
+import Chart2 from '../Charts/Column2D';
+import { fetchSalesCommunityAsync } from '../../../Stone/reportSlice';
 
 ReactFC.fcRoot(FusionCharts, Charts ,FusionTheme);
 
 const DashboardPage = () => {
     const dispatch = useAppDispatch();
-    const {productStatistics ,salesStatistics}= useReport();
+    const {productStatistics ,salesStatistics ,salesCommunity}= useReport();
     const {products} = useProduct()
     const {user}=useUser()
-    console.log("productStatistics",productStatistics)
+    console.log("salesCommunity",salesCommunity)
     const [typeChart, setTypeChart] = useState<string>("doughnut3d");
 
     const dataChartProductStatistics: TypeDataChart[] = productStatistics?.map(info => ({
@@ -164,6 +169,30 @@ const handleOnExport = () => {
   });
 
 
+  const tests = salesCommunity?.sales.map(data => {
+  
+    return {
+        label: data.percent,
+        value: data.communityName
+    }
+});
+
+const [infoReport, setInfoReport] = useState<Community | null>(null);
+const loadReport = async (date : any = null) => {
+    const { data } = await agent.Report.getReport(date);
+    console.log("datasss",data)
+    if (data)setInfoReport(data);
+  };
+
+  
+  const onChange: DatePickerProps['onChange'] = async (_, dateString) => {
+    if(dateString)
+    loadReport(Number(dateString));
+   
+    else
+    loadReport();
+  };
+//   console.log("dateString",dateString)
     return (
          <SidebarAdmin>
           
@@ -202,7 +231,19 @@ const handleOnExport = () => {
                             </div>
                         </div>
                         <Button onClick={handlePrint} className="mr-2"><PrinterOutlined style={{}}/>Print</Button>
-                        <Button onClick={handleOnExport}><FileExcelOutlined />Excel</Button>
+                        <Button onClick={handleOnExport}className="mr-2"><FileExcelOutlined />Excel</Button>
+                        <PDFDownloadLink
+        document={<PDFReport  report={productStatistics as unknown as ProductStatistics[]} />}
+        fileName="รายงาน.pdf"
+      >
+        <Button
+          className=" btn-sm btn-rounded"
+          style={{marginTop:"5px", marginLeft: "0.25%" }}
+          // danger
+        >
+          <FilePdfOutlined /> PDF
+        </Button>
+      </PDFDownloadLink>
                     </div>
               
                 <div ref={componentRef}>
@@ -218,18 +259,25 @@ const handleOnExport = () => {
                             </Card>
                         </Col>
                     </Row>
-
+                    {/* <DatePicker placeholder="กำหนดปี"  onChange={onChange} picker="year" style={{ marginTop: "25px", marginRight: "25px" }} /> */}
                     <Row gutter={16}>
                         {/* <Col className="gutter-row center" span={12}>
                             <Card title="สถิติสินค้า" extra={DropdownChart01} className='text-st' bordered={false} style={{ width: "100%" }}>
                                 <Doughnut3D data={dataChartProductStatistics} ReactFC={ReactFC} typeChart={typeChart} />
                             </Card>
                         </Col> */}
-                        {/* <Col className="gutter-row center" span={12}>
+                        
+                        <Col className="gutter-row center" span={12}>
                             <Card title="สถิติชุมชน" className='text-st' bordered={false} style={{ width: "100%" }}>
-                                <Column3D data={data} ReactFC={ReactFC} />
+                                {/* <Column3D data={tests} ReactFC={ReactFC} /> */}
+                                <Chart2
+                    data={salesCommunity}
+                    ReactFC={ReactFC}
+                    toTalPrice={salesCommunity?.totalPrice}
+                    typeChart="bar3d"
+                  />
                             </Card>
-                        </Col> */}
+                        </Col>
                     </Row>
                     
                 </div>

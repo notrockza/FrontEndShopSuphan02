@@ -63,5 +63,5 @@ export const beforeUploadAntd = (file: RcFile) => {
     return isJpgOrPng && isLt2M;
 };
 
-export const URLSever = "https://localhost:7048/images/";
-export const URL = "http://10.103.0.16/cs63/s03/project-end/"
+//export const URLSever = "https://localhost:7048/images/";
+export const URLSever = "http://10.103.0.16/cs63/s03/project-end/images/"

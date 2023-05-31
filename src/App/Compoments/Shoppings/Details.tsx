@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import agent from "../../API/Agent";
 import { ImageProduct, Product } from "../../Model/Product";
 import HeaderUser from "../PageUser/HeaderUser";
@@ -25,6 +25,8 @@ import useReviews from "../hooks/useReviews";
 import useCart from "../hooks/useCart";
 import DetailCardskeleton from "./DetailCardskeleton/DetailCardskeleton";
 import { URLSever } from "../../API/util/util";
+import useUser from "../hooks/useUser";
+import {CaretRightOutlined } from '@ant-design/icons';
 
 interface IImageGallery {
   original: any;
@@ -47,7 +49,9 @@ function Details() {
 
   //const { carts } = useAppSelector(state => state.crat);
   const { carts , fetchCartAsync } = useCart();
-  const { account } = useAppSelector((state) => state.account);
+  //const { account } = useAppSelector((state) => state.account);
+
+  const {account,localaccount} = useUser();
 
   const [amount, setAmount] = useState<Number | any>(1); // จำนวนสินค้าที่เราจะเพิ่มใส่ตะกร้า
 
@@ -61,10 +65,11 @@ function Details() {
 
   useEffect(() => {
     if (item) setAmount(1);
+    console.log(JSON.parse(localStorage.getItem("account")!))
   }, [item, amount]);
 
   const AddCart = async (accountId: any, productId: any, amount: any) => {
-    if (account) {
+    if (JSON.parse(localStorage.getItem("account")!)) {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -78,7 +83,9 @@ function Details() {
             productId: productId,
             amount: amount,
           })
-        ).then(() =>dispatch(fetchCartAsync(account.id)));
+        ).then(() => {
+          dispatch(fetchCartAsync(JSON.parse(localStorage.getItem("account")!).id))
+        });
       });
     } else
       Swal.fire({
@@ -106,7 +113,7 @@ function Details() {
     );
   });
 
-
+console.log("Reviews",Reviews)
   const review = Reviews?.map((revies: any) => {
     return (
       <div className="d-flex flex-row comment-row" key={revies.id}>
@@ -168,7 +175,7 @@ function Details() {
                 <nav aria-label="breadcrumb">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <a href="/">หน้าเเรก</a>
+                      <Link to="/">หน้าเเรก</Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       รายละเอียด
@@ -233,19 +240,20 @@ function Details() {
                         <ul>
                           <li>
                           <Tag color="orange">
-                            <i className="fas fa-caret-right"></i>{detailProduct?.categoryName}
+                          <CaretRightOutlined style={{marginBlockEnd:"5px"}}/>
+                          {detailProduct?.categoryName}
                             </Tag>
                           </li>
                       
                           <li>
                           <Tag color="geekblue">
-                          <i className="fas fa-caret-right mr-2"></i>
+                          <CaretRightOutlined style={{marginBlockEnd:"5px"}}/>
                             {detailProduct?.levelRarityName}
                           </Tag>
                           </li>
                           <li>
                           <Tag color="green">
-                       <i className="fas fa-caret-right"></i>ชุมชน {detailProduct?.communityGroupName} 
+                          <CaretRightOutlined style={{marginBlockEnd:"5px"}}/>ชุมชน {detailProduct?.communityGroupName} 
                           </Tag>
                           </li>
                         </ul>
@@ -306,7 +314,7 @@ function Details() {
               <div className="product-desc-wrap">
                 <ul className="nav nav-tabs mb-50" id="myTab" role="tablist">
                   <li className="nav-item">
-                    <a
+                    <Button
                       className="nav-link active"
                       id="desc-tab"
                       data-toggle="tab"
@@ -314,13 +322,14 @@ function Details() {
                       role="tab"
                       aria-controls="desc"
                       aria-selected="true"
+
                     >
                       รายละเอียดเพื่มเติม
-                    </a>
+                    </Button>
                   </li>
 
                   <li className="nav-item">
-                    <a
+                    <Button
                       className="nav-link"
                       id="review-tab"
                       data-toggle="tab"
@@ -331,7 +340,7 @@ function Details() {
                     >
                       เเสดงความคิดเห็น ({Reviews?.length}) <span>
                       </span>
-                    </a>
+                    </Button>
                   </li>
                 </ul>
                 <div className="tab-content" id="myTabContent">

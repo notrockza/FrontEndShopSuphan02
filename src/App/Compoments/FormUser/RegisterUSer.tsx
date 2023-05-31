@@ -4,7 +4,7 @@ import HeaderUser from '../PageUser/HeaderUser'
 import SliderUser from '../Silder/SliderUser'
 import { Badge, Button, Input, message, Select, Space } from 'antd';
 import { Formik, Form, ErrorMessage } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../Stone/configureStore';
 import swal from 'sweetalert';
 import { registerAccount, roleAccount } from '../../Stone/accountSlice';
@@ -26,7 +26,7 @@ function RegisterUser() {
         const result = await dispatch(registerAccount(data)).unwrap();
         if (result.msg === "OK") {
             swal({
-                title: "เข้าสู่ระบบสำเร็จ",
+                title: "สมัครสมาชิกสำเร็จ",
                 icon: "success",
                 buttons: [false, "ตกลง"],
             }).then(() => navigate("/login")
@@ -273,8 +273,8 @@ function RegisterUser() {
                                                 </div>
 
                                                 <button className="btn gradient-btn">ตกลง</button>
-                                                <p className="form-check mb-0 fw-bold mt-2 pt-1 mb-0">คุณต้องการเข้าสู่หน้าล็อกอินหรือไม่? <a href="/login"
-                                                    className="link-danger">เข้าสู่ระบบ</a></p>
+                                                <p className="form-check mb-0 fw-bold mt-2 pt-1 mb-0">คุณต้องการเข้าสู่หน้าล็อกอินหรือไม่? <Link to="/login"
+                                                    className="link-danger">เข้าสู่ระบบ</Link></p>
                                             </Form>
                                             )
                                         }

@@ -32,3 +32,16 @@ export interface Product {
     levelRarityID:     number;
     levelRarity:       null;
 }
+
+
+export interface Community {
+    totalPrice: number;
+    sales:      Sale[];
+}
+
+export interface Sale {
+    percent:       number;
+    price:         number;
+    communityId:   number;
+    communityName: string;
+}

@@ -2,15 +2,18 @@ import { Radio, Table, Tag,Image ,MenuProps ,Dropdown, Button ,Col} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useAppDispatch } from '../../../Stone/configureStore';
 import { DeletProduct, GetProduct } from '../../../Stone/productSlice';
-import { DeleteFilled, EditFilled, InfoCircleFilled, PlusOutlined  } from '@ant-design/icons';
+import { DeleteFilled, EditFilled, InfoCircleFilled, PlusOutlined ,PrinterOutlined,FileExcelOutlined,FilePdfOutlined} from '@ant-design/icons';
 import SidebarAdmin from '../Sidebar/SidebarAdmin';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { Ts } from '../../../API/util/util';
 import useProduct from '../../hooks/useProduct';
-
-
-
+import { useReactToPrint } from "react-to-print";
+import { useRef } from 'react';
+import * as XLSX from 'xlsx';
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFProduct from '../PDF/PDFProduct';
+import { Product } from '../../../Model/Product';
 
 function ProductAdmin() {
 
@@ -135,12 +138,26 @@ function ProductAdmin() {
       }).then((result: any) => result.isConfirmed && dispatch(DeletProduct(id)).then(()=>dispatch(GetProduct())))
     };
   
+    const componentRef = useRef(null);
 
+    const handlePrint = useReactToPrint({
+      content: () => componentRef.current,
+      documentTitle: "emp0data",
+    });
+
+    const handleOnExport = () => {
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+      XLSX.utils.book_append_sheet(wb, ws, "MySheet1");
+      XLSX.writeFile(wb, "MyExcel.xlsx");
+    };
+  
 
   return (
     <SidebarAdmin>
  
               <h4>สินค้า</h4>
+            
               <Col span={15} offset={8} style={{ display: "flex", justifyContent: "end" }}>
               <h1>
             <Button className='text-st' type="primary" icon={<PlusOutlined />} style={{height:'35px'}} onClick={() => navigate("/admin/product/form")}>
@@ -148,6 +165,20 @@ function ProductAdmin() {
             </Button>
           </h1>
           </Col>
+          <Button onClick={handlePrint} className="mr-2"><PrinterOutlined style={{}}/>Print</Button>
+          <Button onClick={handleOnExport}  className="mr-2" ><FileExcelOutlined />Excel</Button>
+          <PDFDownloadLink
+        document={<PDFProduct product={products as unknown as Product[]} />}
+        fileName="รายงานสินค้าทั้งหมด.pdf"
+      >
+        <Button
+          className=" btn-sm btn-rounded"
+          style={{marginTop:"5px", marginLeft: "0.25%" }}
+          // danger
+        >
+          <FilePdfOutlined /> PDF
+        </Button>
+      </PDFDownloadLink>
     <div>
       <div>
         <Radio.Group
@@ -163,7 +194,7 @@ function ProductAdmin() {
         //   setBottom(e.target.value);
         // }}
       />
-      <Table  columns={columns} dataSource={data} />
+      <Table  columns={columns} dataSource={data} ref={componentRef}/>
     </div>
   </SidebarAdmin>
   )

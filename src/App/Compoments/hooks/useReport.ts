@@ -1,12 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Stone/configureStore";
-import { fetchProductStatisticsAsync, fetchSalesStatisticsAsync } from "../../Stone/reportSlice";
+import { fetchProductStatisticsAsync, fetchSalesCommunityAsync, fetchSalesStatisticsAsync } from "../../Stone/reportSlice";
+import { Community } from "../../Model/Report";
+import agent from "../../API/Agent";
 
 
 const useReport = () => {
     const dispatch = useAppDispatch()
 
-    const { productStatistics,productStatisticsLoaded,salesStatistics,salesStatisticsLoaded } = useAppSelector((state) => state.report);
+
+  
+
+    const { productStatistics,productStatisticsLoaded,salesStatistics,salesStatisticsLoaded ,salesCommunity,salesCommunityLoaded} = useAppSelector((state) => state.report);
   
       useEffect(()=>{
         if(!productStatisticsLoaded)dispatch(fetchProductStatisticsAsync())
@@ -16,10 +21,17 @@ const useReport = () => {
         if(!salesStatisticsLoaded)dispatch(fetchSalesStatisticsAsync())
       },[salesStatistics])
 
+      useEffect(()=>{
+        if(!salesCommunityLoaded)dispatch(fetchSalesCommunityAsync())
+      },[salesCommunity])
+
+      
     
     return {
         productStatistics,
-        salesStatistics
+        salesStatistics,
+        salesCommunity
+
     };
    
   }

@@ -27,7 +27,8 @@ import DetailAbout from "../Compoments/PageUser/DetailAbout";
 
 export const mainRoutes = (
   <Routes>
-    <Route path="/" element={<AboutUser />} />
+    <Route path="/http://10.103.0.16/cs63/s03/project-end/" element={<AboutUser />} />
+    {/* <Route path="/" element={<AboutUser />} /> */}
     <Route path="/detail/:id" element={<DetailAbout />} />
     <Route path='*' element={<AboutUser />} />
     <Route

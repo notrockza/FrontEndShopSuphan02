@@ -1,4 +1,5 @@
 import React from 'react'
+import {RocketOutlined} from '@ant-design/icons';
 
 function FooterUser() {
     return (
@@ -19,9 +20,9 @@ function FooterUser() {
                                     {/* <p>Agrifram Farming of relse etras sheets connig passag.</p> */}
                                     <div className="footer-contact">
                                         <ul>
-                                            <li><i className="fas fa-map-marker-alt"></i> <span>ที่อยู่ : </span>1710/9 หมุ่ 12 อ.อู่ทอง ต.อู่ทอง จ.สุพรรณบุรี</li>
-                                            <li><i className="fas fa-headphones"></i> <span>เบอร์โทร : </span>1669</li>
-                                            <li><i className="fas fa-envelope-open"></i><span>อีเมล์ : </span>63123250103@kru.ac.th</li>
+                                            <li> <span>ที่อยู่ : </span>1710/9 หมุ่ 12 อ.อู่ทอง ต.อู่ทอง จ.สุพรรณบุรี</li>
+                                            <li> <span>เบอร์โทร : </span>1669</li>
+                                            <li><span>อีเมล์ : </span>63123250103@kru.ac.th</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -77,14 +78,14 @@ function FooterUser() {
                                 <div className="fw-title mb-35">
                                     <h5>ติดตาม</h5>
                                 </div>
-                                <div className="footer-social">
+                                {/* <div className="footer-social">
                                     <ul>
                                         <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
                                         <li><a href="#"><i className="fab fa-twitter"></i></a></li>
                                         <li><a href="#"><i className="fab fa-pinterest-p"></i></a></li>
                                         <li><a href="#"><i className="fab fa-linkedin-in"></i></a></li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="footer-widget mb-50">
                                 <div className="fw-title mb-30">
@@ -93,7 +94,7 @@ function FooterUser() {
                                 <div className="footer-newsletter">
                                     <form action="#">
                                         <input type="text" placeholder="กรอกอีเมล์ของคุณ" />
-                                        <button><i className="fas fa-rocket"></i></button>
+                                        <button><RocketOutlined /></button>
                                     </form>
                                 </div>
                             </div>

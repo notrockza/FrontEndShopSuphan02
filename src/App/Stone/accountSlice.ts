@@ -38,16 +38,17 @@ export const loginAccount = createAsyncThunk<any, Login>(
             formData.append("Email", data.email);
             formData.append("Password", data.password);
             const result = await agent.Account.login(formData);
-            const {...payload} = result;
-            if (payload.result) {
-              const token = payload.result.token;
-              const account = payload.result.account;
-              const cart = payload.result.cart;
+            console.log(result)
+            if (result.msg === "OK") {
+              const token = result.token;
+              const account = result.data;
+              const cart = result.cart;
               thunkAPI.dispatch(setCart(cart));
               thunkAPI.dispatch(setTingAccount({ account: account, token: token } as setUpAccount));
+              localStorage.setItem("account", JSON.stringify(account))
           }
-            localStorage.setItem("account", JSON.stringify(result.data))
-            return payload;
+            
+            return result;
             // console.log(result);
             // return result;
         } catch (error: any) {
@@ -61,7 +62,6 @@ export const fetchAccount = createAsyncThunk<Register>(
     async (_, thunkAPI) => {
       const account = loadAccountStorage();
       thunkAPI.dispatch(setAccount(account));
-      console.log(account)
       try {
         const data = await agent.Account.GetAccountID(account.id);
         localStorage.setItem(
@@ -149,8 +149,8 @@ export const accountSlice = createSlice({
           state.roles = action.payload;
         },
         setAccount: (state, action) => {
-            state.account = action.payload.account;
-            if (action.payload.token) state.token = action.payload.token;
+            state.account = action.payload;
+            // if (action.payload.token) state.token = action.payload.token;
           },
           setTingAccount: (state, action) => {
             const { account, token } = action.payload;

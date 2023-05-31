@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Register } from "../../Model/Account";
 import { useAppSelector } from "../../Stone/configureStore";
 import { UserMenu } from "./UserMenu";
+import {SearchOutlined} from '@ant-design/icons';
 
 function HeaderUser() {
 
@@ -27,12 +28,12 @@ function HeaderUser() {
                 ></div>
                 <nav className="menu-nav show">
                   <div className="logo">
-                    <a href="/">
+                    <Link to="/">
                       <img
                         src="https://drive.google.com/uc?id=1DHaW3RxnuK9ftbDwb1dMQMXhF15RAxEm"
                         alt="Logo"
                       />
-                    </a>
+                    </Link>
                   </div>
 
                   <UserMenu />
@@ -45,10 +46,10 @@ function HeaderUser() {
                       <a href="/login">เข้าสู่ระบบ</a>
                     </li> */}
                     <li>
-                      <a href="#">บัญชี</a>
+                      <Link to="#">บัญชี</Link>
                     </li>
                     <li>
-                      <a href="#">รายการสั่งซื้อ</a>
+                      <Link to="#">รายการสั่งซื้อ</Link>
                     </li>
                   </ul>
                 </div>
@@ -56,7 +57,8 @@ function HeaderUser() {
                   <form action="#">
                     <input type="text" />
                     <button>
-                      <i className="fas fa-search"></i>
+                      {/* <i className="fas fa-search"></i> */}
+                      <SearchOutlined />
                     </button>
                   </form>
                 </div>
@@ -69,41 +71,41 @@ function HeaderUser() {
 
                 <nav className="menu-box">
                   <div className="nav-logo">
-                    <a href="index.html">
+                    <Link to="index.html">
                       <img
                         // src="./src/assets/img/logo/w_logo.png"
                         alt=""
                         title=""
                       />
-                    </a>
+                    </Link>
                   </div>
                   <div className="menu-outer"></div>
                   <div className="social-links">
                     <ul className="clearfix">
                       <li>
-                        <a href="#">
+                        <Link to="#">
                           <span className="fab fa-twitter"></span>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link to="#">
                           <span className="fab fa-facebook-square"></span>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link to="#">
                           <span className="fab fa-pinterest-p"></span>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link to="#">
                           <span className="fab fa-instagram"></span>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link to="#">
                           <span className="fab fa-youtube"></span>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>

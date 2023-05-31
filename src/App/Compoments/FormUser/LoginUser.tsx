@@ -147,9 +147,9 @@ function LoginUser() {
                           {/* <!-- Checkbox --> */}
 
                           <div className="form-check mb-0">
-                            <a href="#!" className="text-body p-2 bd-highlight">
+                            <Link to="#!" className="text-body p-2 bd-highlight">
                               ลืมรหัสผ่าน?
-                            </a>
+                            </Link>
                           </div>
                         </div>
                         <button type="submit" className="btn gradient-btn">
@@ -158,9 +158,9 @@ function LoginUser() {
 
                         <p className="form-check mb-0 fw-bold mt-2 pt-1 mb-0">
                           ไม่มีบัญชียังงั้นหรอ มัวรออะไรอยู่ล่ะ?{" "}
-                          <a href="/register" className="link-danger">
+                          <Link to="/register" className="link-danger">
                             สมัครสมาชิก
-                          </a>
+                          </Link>
                         </p>
                       </Form>
                     )}

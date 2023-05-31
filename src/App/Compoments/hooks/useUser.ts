@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GetAccountAll, fetchAccount, setAccount } from "../../Stone/accountSlice";
+import { GetAccountAll, fetchAccount, loadAccountStorage, setAccount } from "../../Stone/accountSlice";
 import { useAppDispatch, useAppSelector } from "../../Stone/configureStore";
 import { User } from "../../Model/Account";
 import agent from "../../API/Agent";
@@ -27,9 +27,9 @@ const useUser = () => {
 
   useEffect(() => {
     if (userLoaded) dispatch(fetchAccount());
-    if (!localaccount)dispatch(fetchAccount())
+    if (!localaccount) dispatch(fetchAccount())
     //if(!accounts) dispatch(GetAccountAll())
-  }, [account, dispatch]);
+  }, [account, dispatch ]);
 
     return {
         account,
